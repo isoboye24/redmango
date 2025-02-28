@@ -4,7 +4,7 @@ import { MenuItemList } from '../components/page/menuItems';
 const Home = () => {
   return (
     <div>
-      <div className="p-2">
+      <div className="p-5 d-flex justify-content-center align-items-center">
         <MenuItemList />
       </div>
     </div>
