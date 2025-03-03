@@ -31,7 +31,6 @@ const MenuItemDetail = () => {
       updateQuantityBy: quantity,
       userId: 'c55c9162-4af5-4f15-8870-37fb5972f9e9',
     });
-    console.log(response);
 
     setIsAddingToCart(false);
   };
