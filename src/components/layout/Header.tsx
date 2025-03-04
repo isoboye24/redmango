@@ -5,7 +5,7 @@ let logo = require('../../assets/images/mango.png');
 const Header = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+      <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-5">
         <div className="container-fluid">
           <NavLink className="nav-link" aria-current="page" to="/">
             <img src={logo} style={{ height: '40px' }} className="m-1" alt="" />
@@ -32,12 +32,30 @@ const Header = () => {
                 <NavLink
                   className="nav-link"
                   aria-current="page"
-                  to="/shoppingcart"
+                  to="/about-us"
                 >
-                  <i className="bi bi-cart2"></i>
+                  About Us
                 </NavLink>
               </li>
-              <li className="nav-item dropdown">
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  aria-current="page"
+                  to="/products"
+                >
+                  Products
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  aria-current="page"
+                  to="/contact-us"
+                >
+                  Contact Us
+                </NavLink>
+              </li>
+              {/* <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -65,6 +83,17 @@ const Header = () => {
                     </a>
                   </li>
                 </ul>
+              </li> */}
+            </ul>
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item text-end">
+                <NavLink
+                  className="nav-link"
+                  aria-current="page"
+                  to="/shoppingcart"
+                >
+                  <i className="bi bi-cart2"></i>
+                </NavLink>
               </li>
             </ul>
           </div>

@@ -99,7 +99,7 @@ const MenuItemDetail = () => {
                   className="btn btn-secondary form-control"
                   onClick={() => navigate(-1)}
                 >
-                  Back to Home
+                  Back to Product List
                 </button>
               </div>
             </div>

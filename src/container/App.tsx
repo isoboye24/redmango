@@ -1,7 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Header, Footer } from '../components/layout';
-import { Home, MenuItemDetail, NotFound } from '../pages';
+import {
+  About,
+  Contact,
+  Home,
+  MenuItemDetail,
+  NotFound,
+  Product,
+} from '../pages';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -11,10 +18,13 @@ function App() {
       <div className="pb-5">
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/about-us" element={<About />}></Route>
+          <Route path="/products" element={<Product />}></Route>
           <Route
             path="/menuItemDetails/:menuItemId"
             element={<MenuItemDetail />}
           ></Route>
+          <Route path="/contact-us" element={<Contact />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
