@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { Header, Footer } from '../components/layout';
 import {
   About,
@@ -10,6 +9,7 @@ import {
   Product,
 } from '../pages';
 import { Route, Routes } from 'react-router-dom';
+import { Profile } from '../pages/profile';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
             element={<MenuItemDetail />}
           ></Route>
           <Route path="/contact-us" element={<Contact />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

@@ -86,13 +86,21 @@ const Header = () => {
               </li> */}
             </ul>
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item text-end">
+              <li className="nav-item">
                 <NavLink
                   className="nav-link"
                   aria-current="page"
                   to="/shoppingcart"
                 >
-                  <i className="bi bi-cart2"></i>
+                  <i className="bi bi-cart2" style={{ fontSize: '25px' }}></i>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" to="/profile">
+                  <i
+                    className="bi bi-person-fill"
+                    style={{ fontSize: '25px' }}
+                  ></i>
                 </NavLink>
               </li>
             </ul>
