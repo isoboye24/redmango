@@ -8,6 +8,7 @@ import {
   MenuItemDetail,
   NotFound,
   Product,
+  ShoppingCart,
 } from '../pages';
 import { Route, Routes } from 'react-router-dom';
 import { Profile } from '../pages/profile';
@@ -42,6 +43,7 @@ function App() {
           ></Route>
           <Route path="/contact-us" element={<Contact />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/shoppingcart" element={<ShoppingCart />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
