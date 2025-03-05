@@ -103,10 +103,14 @@ const Header = () => {
                     className="bi bi-cart2 position-relative d-inline-block rounded "
                     style={{ fontSize: '25px' }}
                   >
-                    <span className="position-absolute start-150 translate-middle circle text-white text-size">
+                    <span
+                      className={`position-absolute start-150 translate-middle ${
+                        shoppingCartFromStore.length ? 'circle' : ''
+                      } text-white text-size`}
+                    >
                       {shoppingCartFromStore?.length
                         ? `${shoppingCartFromStore.length}`
-                        : '0'}
+                        : ''}
                     </span>
                   </i>
                 </NavLink>

@@ -76,7 +76,9 @@ const CartSummary = () => {
             <div className="d-flex justify-content-between align-items-center">
               <h4 style={{ fontWeight: 300 }}>{cartItem.menuItem?.name}</h4>
               <h4>
-                {(cartItem.quantity! * cartItem.menuItem!.price).toFixed(2)}
+                {`€${(cartItem.quantity! * cartItem.menuItem!.price).toFixed(
+                  2
+                )}`}
               </h4>
             </div>
             <div className="flex-fill">
