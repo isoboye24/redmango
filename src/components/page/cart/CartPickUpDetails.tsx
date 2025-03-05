@@ -3,8 +3,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../Storage/Redux/store';
 import { cartItemModel } from '../../../Interfaces';
 import { inputHelper } from '../../../helper';
+import { MiniLoader } from '../common';
 
 const CartPickUpDetails = () => {
+  const [loading, setLoading] = useState(false);
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
@@ -29,13 +31,18 @@ const CartPickUpDetails = () => {
     return null;
   });
 
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+  };
+
   return (
     <div className="border pb-5 pt-3">
       <h1 style={{ fontWeight: '300' }} className="text-center text-success">
         Pickup Details
       </h1>
       <hr />
-      <form className="col-10 mx-auto">
+      <form className="col-10 mx-auto" onSubmit={handleSubmit}>
         <div className="form-group mt-3">
           Pickup Name
           <input
@@ -82,8 +89,9 @@ const CartPickUpDetails = () => {
         <button
           type="submit"
           className="btn btn-lg btn-success form-control mt-3"
+          disabled={loading}
         >
-          Looks Good? Place Order!
+          {loading ? <MiniLoader /> : 'Looks Good? Place Order!'}
         </button>
       </form>
     </div>
