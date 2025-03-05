@@ -24,8 +24,8 @@ function App() {
 
   useEffect(() => {
     if (!isLoading) {
-      console.log(data.result);
-      dispatch(setShoppingCart(data.result.cartItems));
+      console.log(data.result.cartItems);
+      dispatch(setShoppingCart(data.result?.cartItems));
     }
   }, [data]);
 
