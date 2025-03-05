@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Storage/Redux/store';
 import { cartItemModel } from '../../../Interfaces';
+import { inputHelper } from '../../../helper';
 
 const CartPickUpDetails = () => {
   const shoppingCartFromStore: cartItemModel[] = useSelector(
@@ -9,6 +10,18 @@ const CartPickUpDetails = () => {
   );
   let grandTotal = 0;
   let totalItem = 0;
+
+  const initialUserData = {
+    name: '',
+    email: '',
+    phoneNumber: '',
+  };
+
+  const [userInput, setUserInput] = useState(initialUserData);
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const tempData = inputHelper(e, userInput);
+    setUserInput(tempData);
+  };
 
   shoppingCartFromStore?.map((cartItem: cartItemModel) => {
     totalItem += cartItem.quantity ?? 0;
@@ -27,6 +40,8 @@ const CartPickUpDetails = () => {
           Pickup Name
           <input
             type="text"
+            value={userInput.name}
+            onChange={handleUserInput}
             className="form-control"
             placeholder="name..."
             name="name"
@@ -37,6 +52,8 @@ const CartPickUpDetails = () => {
           Pickup Email
           <input
             type="email"
+            value={userInput.email}
+            onChange={handleUserInput}
             className="form-control"
             placeholder="email..."
             name="email"
@@ -48,6 +65,8 @@ const CartPickUpDetails = () => {
           Pickup Phone Number
           <input
             type="number"
+            value={userInput.phoneNumber}
+            onChange={handleUserInput}
             className="form-control"
             placeholder="phone number..."
             name="phoneNumber"
