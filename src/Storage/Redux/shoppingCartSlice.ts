@@ -15,7 +15,7 @@ export const shoppingCartSlice = createSlice({
     updateQuantity: (state, action) => {
       state.cartItems = state.cartItems?.map((item) => {
         if (item.cartItemId === action.payload.cartItem.cartItemId) {
-          item.quantity = action.payload.cartItem.cartItemId;
+          item.quantity = action.payload.quantity;
         }
         return item;
       });
