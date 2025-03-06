@@ -5,6 +5,8 @@ import { apiResponse, userModel } from '../Interfaces';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { setLoggedInUser } from '../Storage/Redux/userAuthSlice';
+import { useNavigate } from 'react-router-dom';
+import { MainLoader } from '../components/page/common';
 
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
@@ -16,6 +18,7 @@ const Login = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tempData = inputHelper(e, userInput);
@@ -36,6 +39,7 @@ const Login = () => {
       const { fullName, id, email, role }: userModel = jwtDecode(token);
       localStorage.setItem('token', token);
       dispatch(setLoggedInUser({ fullName, id, email, role }));
+      navigate('/');
     } else if (response.error) {
       console.log(response.error.data.errorMessages[0]);
       setError(response.error.data.errorMessages[0]);
@@ -46,6 +50,7 @@ const Login = () => {
 
   return (
     <div className="container text-center">
+      {loading && <MainLoader />}
       <form method="post" onSubmit={handleSubmit}>
         <h1 className="mt-5">Login</h1>
         <div className="mt-5">

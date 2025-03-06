@@ -2,12 +2,16 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Storage/Redux/store';
-import { cartItemModel } from '../../Interfaces';
+import { cartItemModel, userModel } from '../../Interfaces';
 let logo = require('../../assets/images/mango.png');
 
 const Header = () => {
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
+  );
+
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
   );
 
   return (
@@ -62,37 +66,25 @@ const Header = () => {
                   Contact Us
                 </NavLink>
               </li>
-              {/* <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Admin Panel
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li> */}
             </ul>
             <ul className=" navbar-nav bg-dark navbar-dark ms-auto me-5">
+              {userData && (
+                <>
+                  <div className="nav-link">
+                    <button
+                      className="nav-link active"
+                      style={{
+                        cursor: 'pointer',
+                        background: 'transparent',
+                        border: '0',
+                      }}
+                    >
+                      Welcome, {userData.fullName}
+                    </button>
+                  </div>
+                </>
+              )}
+
               <li className="nav-item mx-2">
                 <NavLink
                   className="nav-link"
@@ -132,21 +124,33 @@ const Header = () => {
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
                 >
-                  <li className="nav-item">
-                    <NavLink className="dropdown-item" to="/profile">
-                      Profile
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="dropdown-item" to="/register">
-                      Register
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="dropdown-item" to="/login">
-                      Login
-                    </NavLink>
-                  </li>
+                  {userData ? (
+                    <>
+                      <li className="nav-item">
+                        <NavLink className="dropdown-item" to="/profile">
+                          Profile
+                        </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink className="dropdown-item" to="/login">
+                          Logout
+                        </NavLink>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="nav-item">
+                        <NavLink className="dropdown-item" to="/register">
+                          Register
+                        </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink className="dropdown-item" to="/login">
+                          Login
+                        </NavLink>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </ul>
