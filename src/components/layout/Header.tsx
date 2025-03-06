@@ -1,11 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Storage/Redux/store';
 import { cartItemModel, userModel } from '../../Interfaces';
+import {
+  emptyUserState,
+  setLoggedInUser,
+} from '../../Storage/Redux/userAuthSlice';
 let logo = require('../../assets/images/mango.png');
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
@@ -13,6 +20,12 @@ const Header = () => {
   const userData: userModel = useSelector(
     (state: RootState) => state.userAuthStore
   );
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(setLoggedInUser({ ...emptyUserState }));
+    navigate('/');
+  };
 
   return (
     <div>
@@ -68,21 +81,21 @@ const Header = () => {
               </li>
             </ul>
             <ul className=" navbar-nav bg-dark navbar-dark ms-auto me-5">
-              {userData && (
-                <>
-                  <div className="nav-link">
-                    <button
-                      className="nav-link active"
-                      style={{
-                        cursor: 'pointer',
-                        background: 'transparent',
-                        border: '0',
-                      }}
-                    >
-                      Welcome, {userData.fullName}
-                    </button>
-                  </div>
-                </>
+              {userData?.email ? (
+                <div className="nav-link">
+                  <button
+                    className="nav-link active"
+                    style={{
+                      cursor: 'pointer',
+                      background: 'transparent',
+                      border: '0',
+                    }}
+                  >
+                    Welcome, {userData.email}
+                  </button>
+                </div>
+              ) : (
+                ''
               )}
 
               <li className="nav-item mx-2">
@@ -124,7 +137,7 @@ const Header = () => {
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
                 >
-                  {userData ? (
+                  {userData?.email ? (
                     <>
                       <li className="nav-item">
                         <NavLink className="dropdown-item" to="/profile">
@@ -132,9 +145,12 @@ const Header = () => {
                         </NavLink>
                       </li>
                       <li className="nav-item">
-                        <NavLink className="dropdown-item" to="/login">
+                        <a
+                          className="dropdown-item pointer"
+                          onClick={handleLogout}
+                        >
                           Logout
-                        </NavLink>
+                        </a>
                       </li>
                     </>
                   ) : (
