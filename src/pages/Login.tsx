@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLoginUserMutation } from '../APIs/AuthApi';
+import { inputHelper } from '../helper';
 
 const Login = () => {
+  const [registerUser] = useLoginUserMutation();
+  const [loading, setLoading] = useState(false);
+  const [userInput, setUserInput] = useState({
+    userName: '',
+    password: '',
+  });
+
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const tempData = inputHelper(e, userInput);
+    setUserInput(tempData);
+  };
+
   return (
     <div className="container text-center">
       <form method="post">
@@ -11,7 +25,10 @@ const Login = () => {
               type="text"
               className="form-control"
               placeholder="Enter Username"
+              name="userName"
               required
+              value={userInput.userName}
+              onChange={handleUserInput}
             />
           </div>
 
@@ -20,7 +37,10 @@ const Login = () => {
               type="password"
               className="form-control"
               placeholder="Enter Password"
+              name="password"
               required
+              value={userInput.password}
+              onChange={handleUserInput}
             />
           </div>
         </div>
