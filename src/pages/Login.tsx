@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useLoginUserMutation } from '../APIs/AuthApi';
 import { inputHelper } from '../helper';
-import { apiResponse } from '../Interfaces';
+import { apiResponse, userModel } from '../Interfaces';
+import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { setLoggedInUser } from '../Storage/Redux/userAuthSlice';
 
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
@@ -11,6 +14,8 @@ const Login = () => {
     userName: '',
     password: '',
   });
+
+  const dispatch = useDispatch();
 
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tempData = inputHelper(e, userInput);
@@ -28,7 +33,9 @@ const Login = () => {
     if (response.data) {
       console.log(response.data);
       const { token } = response.data.result;
+      const { fullName, id, email, role }: userModel = jwtDecode(token);
       localStorage.setItem('token', token);
+      dispatch(setLoggedInUser({ fullName, id, email, role }));
     } else if (response.error) {
       console.log(response.error.data.errorMessages[0]);
       setError(response.error.data.errorMessages[0]);
@@ -68,7 +75,7 @@ const Login = () => {
         </div>
 
         <div className="mt-2">
-          {error && <p className="text-danger">{error}</p>}
+          {error ? <p className="text-danger">{error}</p> : ''}
           <button
             type="submit"
             className="btn btn-success"
