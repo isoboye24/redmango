@@ -5,9 +5,11 @@ import {
   About,
   Contact,
   Home,
+  Login,
   MenuItemDetail,
   NotFound,
   Product,
+  Register,
   ShoppingCart,
 } from '../pages';
 import { Route, Routes } from 'react-router-dom';
@@ -44,6 +46,8 @@ function App() {
           <Route path="/contact-us" element={<Contact />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/shoppingcart" element={<ShoppingCart />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

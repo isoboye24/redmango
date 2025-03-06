@@ -14,7 +14,7 @@ const Header = () => {
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-5">
         <div className="container-fluid">
-          <NavLink className="nav-link" aria-current="page" to="/">
+          <NavLink className="nav-link bg-warning" aria-current="page" to="/">
             <img src={logo} style={{ height: '40px' }} className="m-1" alt="" />
           </NavLink>
           <button
@@ -92,8 +92,8 @@ const Header = () => {
                 </ul>
               </li> */}
             </ul>
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
+            <ul className=" navbar-nav bg-dark navbar-dark ms-auto me-5">
+              <li className="nav-item mx-2">
                 <NavLink
                   className="nav-link"
                   aria-current="page"
@@ -115,14 +115,40 @@ const Header = () => {
                   </i>
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/profile">
+              <div className="dropdown">
+                <button
+                  className="btn btn-dark text-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   <i
-                    className="bi bi-person-fill"
+                    className="bi bi-person-fill text-secondary"
                     style={{ fontSize: '25px' }}
                   ></i>
-                </NavLink>
-              </li>
+                </button>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" to="/profile">
+                      Profile
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" to="/register">
+                      Register
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" to="/login">
+                      Login
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
             </ul>
           </div>
         </div>

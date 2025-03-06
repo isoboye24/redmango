@@ -5,6 +5,8 @@ import About from './About';
 import Product from './Product';
 import Contact from './Contact';
 import ShoppingCart from './ShoppingCart';
+import Register from './Register';
+import Login from './Login';
 
 export {
   Home,
@@ -14,4 +16,6 @@ export {
   Product,
   Contact,
   ShoppingCart,
+  Register,
+  Login,
 };
