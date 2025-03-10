@@ -4,6 +4,7 @@ import { inputHelper, ToastNotify } from '../helper';
 import { useRegisterUserMutation } from '../APIs/AuthApi';
 import { apiResponse } from '../Interfaces';
 import { useNavigate } from 'react-router-dom';
+import { MainLoader } from '../components/page/common';
 
 const Register = () => {
   const [registerUser] = useRegisterUserMutation();
@@ -44,6 +45,7 @@ const Register = () => {
 
   return (
     <div className="container text-center">
+      {loading && <MainLoader />}
       <form method="post" onSubmit={handleSubmit}>
         <h1 className="mt-5">Register</h1>
         <div className="mt-5">
@@ -95,7 +97,7 @@ const Register = () => {
           </div>
         </div>
         <div className="mt-5">
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" disabled={loading}>
             Register
           </button>
         </div>
