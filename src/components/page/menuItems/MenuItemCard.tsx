@@ -3,6 +3,7 @@ import { menuItemModel } from '../../../Interfaces';
 import { Link } from 'react-router-dom';
 import { useUpdateShoppingCartMutation } from '../../../APIs/shoppingCartApi';
 import { MiniLoader } from '../common';
+import { ToastNotify } from '../../../helper';
 
 interface Props {
   menuItem: menuItemModel;
@@ -20,9 +21,12 @@ const MenuItemCard = (props: Props) => {
       updateQuantityBy: 1,
       userId: 'c55c9162-4af5-4f15-8870-37fb5972f9e9',
     });
-
+    if (response.data && response.data.isSuccess) {
+      ToastNotify('Item added to cart successfully!');
+    }
     setIsAddingToCart(false);
   };
+
   return (
     <div className="col-md-4 col-12 p-4">
       <div
